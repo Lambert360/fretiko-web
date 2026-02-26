@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Clash+Display:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-black text-white font-inter;
+  }
+}
+
+@layer components {
+  .neon-text {
+    @apply bg-gradient-to-r from-neon-cyan via-neon-magenta to-neon-cyan bg-clip-text text-transparent bg-[length:200%_200%] animate-neon-glow font-clash font-bold uppercase tracking-wider;
+  }
+  
+  .neon-border {
+    @apply border-2 border-neon-cyan shadow-[0_0_20px_rgba(0,255,255,0.4)];
+  }
+  
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-neon-cyan to-neon-purple px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-neon-cyan/50;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-105 hover:border-neon-cyan/30 hover:shadow-lg hover:shadow-neon-cyan/20;
+  }
+}
