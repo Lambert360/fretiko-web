@@ -119,39 +119,37 @@ async function sendWelcomeEmail(email: string): Promise<boolean> {
     const data = await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL || 'welcome@fretiko.com',
       to: [email],
-      subject: 'Welcome to Fretiko City',
+      subject: 'Welcome to Fretiko',
       replyTo: 'no-reply@fretiko.com',
       headers: {
         'X-Entity-Ref-ID': 'fretiko-welcome',
         'List-Unsubscribe': '<mailto:unsubscribe@fretiko.com>',
       },
-      text: `Welcome to Fretiko City!
+      text: `Welcome to Fretiko
 
-Your journey to the digital realm has just begun!
+Thank you for joining our community. Your journey in the digital realm begins here.
 
-You've discovered something extraordinary. Fretiko isn't just a social network—it's a digital nation where freedom meets connection.
+Fretiko is a social platform where people connect and share experiences in a digital environment.
 
-What's Coming:
-• Revolutionary social shopping experience
-• Borderless digital community  
-• AI-powered discovery engine
-• Personalized to your digital soul
-• Community powered digital nation
+Features available:
+• Social networking experience
+• Digital community connection
+• Discovery tools
+• Personalized experience
+• Community-driven platform
 
-The future is here. Claim your space.
+We look forward to having you with us.
 
- 2024 Fretiko - Building digital nation.
+Best regards,
+The Fretiko Team
 
 To unsubscribe, reply to this email.`,
       html: `
         <!DOCTYPE html>
         <html>
         <head>
-          <meta name="color-scheme" content="light dark">
-          <meta name="supported-color-schemes" content="light dark">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <style>
-            /* iOS Mail specific fixes */
             body {
               font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
               max-width: 600px;
@@ -162,18 +160,9 @@ To unsubscribe, reply to this email.`,
               -webkit-text-size-adjust: 100%;
             }
             
-            /* iOS dark mode support */
-            @media (prefers-color-scheme: dark) {
-              body {
-                background-color: #000000 !important;
-                color: #ffffff !important;
-              }
-            }
-            
-            /* iOS Mail doesn't support media queries, so use inline styles as fallback */
             .container {
               background-color: #ffffff;
-              border-radius: 12px;
+              border-radius: 8px;
               overflow: hidden;
               border: 1px solid #e5e7eb;
             }
@@ -185,31 +174,27 @@ To unsubscribe, reply to this email.`,
             }
             
             .title {
-              font-size: 28px;
+              font-size: 24px;
               margin-bottom: 10px;
               font-weight: bold;
-              color: #10b981;
+              color: #333333;
             }
             
             .subtitle {
               font-size: 16px;
               margin-bottom: 0;
-              color: #6b7280;
+              color: #666666;
             }
             
-            .hero-section {
-              padding: 30px;
+            .content-section {
+              padding: 25px;
               margin: 0 20px;
-              border-radius: 12px;
-              background: #1e293b;
-              background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-              color: #ffffff;
             }
             
             .features-section {
               background-color: #f8f9fa;
-              padding: 25px;
-              border-radius: 12px;
+              padding: 20px;
+              border-radius: 8px;
               margin: 20px;
               border: 1px solid #e5e7eb;
             }
@@ -217,99 +202,55 @@ To unsubscribe, reply to this email.`,
             .feature-title {
               font-size: 18px;
               margin-bottom: 15px;
-              color: #1f2937;
+              color: #333333;
               font-weight: bold;
             }
             
             .feature-list {
-              line-height: 1.8;
+              line-height: 1.6;
               margin: 0;
               padding-left: 20px;
-              color: #4b5563;
-            }
-            
-            .cta-section {
-              text-align: center;
-              margin: 30px 20px;
-            }
-            
-            .highlight-text {
-              font-weight: bold;
-              font-size: 16px;
-              color: #10b981;
+              color: #666666;
             }
             
             .footer {
               text-align: center;
-              margin-top: 40px;
+              margin-top: 30px;
               padding-top: 20px;
               border-top: 1px solid #e5e7eb;
-              font-size: 12px;
-              color: #9ca3af;
-            }
-            
-            /* Dark mode overrides for iOS */
-            [data-color-scheme="dark"] .container {
-              background-color: #1c1c1e !important;
-              border-color: #38383a !important;
-            }
-            
-            [data-color-scheme="dark"] .features-section {
-              background-color: #2c2c2e !important;
-              border-color: #38383a !important;
-            }
-            
-            [data-color-scheme="dark"] .feature-title {
-              color: #ffffff !important;
-            }
-            
-            [data-color-scheme="dark"] .feature-list {
-              color: #aeaeb2 !important;
-            }
-            
-            [data-color-scheme="dark"] .footer {
-              border-top-color: #38383a !important;
-              color: #8e8e93 !important;
+              font-size: 14px;
+              color: #999999;
             }
           </style>
         </head>
         <body>
           <div class="container">
             <div class="header">
-              <h1 class="title">Welcome to Fretiko City</h1>
-              <p class="subtitle">Your journey to the digital realm has just begun!</p>
+              <h1 class="title">Welcome to Fretiko</h1>
+              <p class="subtitle">Thank you for joining our community</p>
             </div>
             
-            <div class="hero-section">
-              <h2 style="font-size: 20px; margin-bottom: 15px; color: #ffffff;">🏙️ City in the Clouds</h2>
-              <p style="line-height: 1.6; margin-bottom: 20px; color: #e2e8f0;">
-                You've discovered something extraordinary. Fretiko isn't just a social network—it's a digital nation where freedom meets connection.
-              </p>
-              <p class="highlight-text" style="color: #10b981;">
-                "A place where freedom meets connection."
+            <div class="content-section">
+              <p style="line-height: 1.6; margin-bottom: 20px; color: #333333;">
+                Fretiko is a social platform where people connect and share experiences in a digital environment.
               </p>
             </div>
             
             <div class="features-section">
-              <h3 class="feature-title">🚀 What's Coming?</h3>
+              <h3 class="feature-title">Features Available</h3>
               <ul class="feature-list">
-                <li>✨ Revolutionary social shopping experience</li>
-                <li>🌐 Borderless digital community</li>
-                <li>💫 AI-powered discovery engine</li>
-                <li>🎯 Personalized to your digital soul</li>
-                <li>🏛️ Community powered digital nation</li>
+                <li>Social networking experience</li>
+                <li>Digital community connection</li>
+                <li>Discovery tools</li>
+                <li>Personalized experience</li>
+                <li>Community-driven platform</li>
               </ul>
-            </div>
-            
-            <div class="cta-section">
-              <p class="highlight-text">
-                The future is here. Claim your space.
-              </p>
             </div>
             
             <div class="footer">
               <p style="margin: 0;">
-                ©️ 2024 Fretiko - Building digital nation.
+                Best regards,<br>
+                The Fretiko Team
               </p>
             </div>
           </div>
