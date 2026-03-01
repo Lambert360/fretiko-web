@@ -119,14 +119,31 @@ async function sendWelcomeEmail(email: string): Promise<boolean> {
     const data = await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL || 'welcome@fretiko.com',
       to: [email],
-      subject: 'Welcome to Fretiko City 🌟',
+      subject: 'Welcome to Fretiko City',
       replyTo: 'no-reply@fretiko.com',
       headers: {
         'X-Entity-Ref-ID': 'fretiko-welcome',
         'List-Unsubscribe': '<mailto:unsubscribe@fretiko.com>',
       },
+      text: `Welcome to Fretiko City!
+
+Your journey to the digital realm has just begun!
+
+You've discovered something extraordinary. Fretiko isn't just a social network—it's a digital nation where freedom meets connection.
+
+What's Coming:
+• Revolutionary social shopping experience
+• Borderless digital community  
+• AI-powered discovery engine
+• Personalized to your digital soul
+• Community powered digital nation
+
+The future is here. Claim your space.
+
+ 2024 Fretiko - Building digital nation.
+
+To unsubscribe, reply to this email.`,
       html: `
-        <!DOCTYPE html>
         <html>
         <head>
           <meta name="color-scheme" content="light dark">
