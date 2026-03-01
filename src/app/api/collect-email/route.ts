@@ -270,7 +270,6 @@ async function sendWelcomeEmail(email: string): Promise<boolean> {
               <p class="highlight-text" style="color: #10b981; margin-bottom: 20px;">
                 The future is here. - Claim your space.
               </p>
-              <a href="#" class="download-btn">Download Fretiko</a>
             </div>
             
             <div class="footer">
