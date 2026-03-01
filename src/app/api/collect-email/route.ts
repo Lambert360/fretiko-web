@@ -144,37 +144,38 @@ The future is here. Claim your space.
 
 To unsubscribe, reply to this email.`,
       html: `
+        <!DOCTYPE html>
         <html>
         <head>
           <meta name="color-scheme" content="light dark">
           <meta name="supported-color-schemes" content="light dark">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <style>
+            /* iOS Mail specific fixes */
             body {
-              font-family: Arial, sans-serif;
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
               max-width: 600px;
               margin: 0 auto;
               padding: 20px;
               background-color: #ffffff;
               color: #333333;
+              -webkit-text-size-adjust: 100%;
             }
             
+            /* iOS dark mode support */
             @media (prefers-color-scheme: dark) {
               body {
-                background-color: #1a1a1a;
-                color: #ffffff;
+                background-color: #000000 !important;
+                color: #ffffff !important;
               }
             }
             
+            /* iOS Mail doesn't support media queries, so use inline styles as fallback */
             .container {
               background-color: #ffffff;
               border-radius: 12px;
               overflow: hidden;
-            }
-            
-            @media (prefers-color-scheme: dark) {
-              .container {
-                background-color: #2d2d2d;
-              }
+              border: 1px solid #e5e7eb;
             }
             
             .header {
@@ -184,20 +185,25 @@ To unsubscribe, reply to this email.`,
             }
             
             .title {
-              font-size: 32px;
+              font-size: 28px;
               margin-bottom: 10px;
               font-weight: bold;
+              color: #10b981;
             }
             
             .subtitle {
-              font-size: 18px;
+              font-size: 16px;
               margin-bottom: 0;
+              color: #6b7280;
             }
             
             .hero-section {
               padding: 30px;
               margin: 0 20px;
               border-radius: 12px;
+              background: #1e293b;
+              background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+              color: #ffffff;
             }
             
             .features-section {
@@ -205,12 +211,21 @@ To unsubscribe, reply to this email.`,
               padding: 25px;
               border-radius: 12px;
               margin: 20px;
+              border: 1px solid #e5e7eb;
             }
             
-            @media (prefers-color-scheme: dark) {
-              .features-section {
-                background-color: #404040;
-              }
+            .feature-title {
+              font-size: 18px;
+              margin-bottom: 15px;
+              color: #1f2937;
+              font-weight: bold;
+            }
+            
+            .feature-list {
+              line-height: 1.8;
+              margin: 0;
+              padding-left: 20px;
+              color: #4b5563;
             }
             
             .cta-section {
@@ -218,54 +233,57 @@ To unsubscribe, reply to this email.`,
               margin: 30px 20px;
             }
             
+            .highlight-text {
+              font-weight: bold;
+              font-size: 16px;
+              color: #10b981;
+            }
+            
             .footer {
               text-align: center;
               margin-top: 40px;
               padding-top: 20px;
               border-top: 1px solid #e5e7eb;
-              font-size: 14px;
+              font-size: 12px;
+              color: #9ca3af;
             }
             
-            @media (prefers-color-scheme: dark) {
-              .footer {
-                border-top-color: #404040;
-              }
+            /* Dark mode overrides for iOS */
+            [data-color-scheme="dark"] .container {
+              background-color: #1c1c1e !important;
+              border-color: #38383a !important;
             }
             
-            .feature-list {
-              line-height: 1.8;
-              margin: 0;
-              padding-left: 20px;
+            [data-color-scheme="dark"] .features-section {
+              background-color: #2c2c2e !important;
+              border-color: #38383a !important;
             }
             
-            .highlight-text {
-              font-weight: bold;
-              font-size: 18px;
+            [data-color-scheme="dark"] .feature-title {
+              color: #ffffff !important;
             }
             
-            .download-btn {
-              display: inline-block;
-              padding: 15px 30px;
-              background: linear-gradient(135deg, #10b981, #059669);
-              color: #ffffff;
-              text-decoration: none;
-              border-radius: 8px;
-              font-weight: bold;
-              margin: 20px 0;
+            [data-color-scheme="dark"] .feature-list {
+              color: #aeaeb2 !important;
+            }
+            
+            [data-color-scheme="dark"] .footer {
+              border-top-color: #38383a !important;
+              color: #8e8e93 !important;
             }
           </style>
         </head>
         <body>
           <div class="container">
             <div class="header">
-              <h1 class="title" style="color: #10b981; margin: 0 0 10px 0;">Welcome to Fretiko City</h1>
-              <p class="subtitle" style="color: #6b7280; margin: 0;">Your journey to the digital realm has just begun!</p>
+              <h1 class="title">Welcome to Fretiko City</h1>
+              <p class="subtitle">Your journey to the digital realm has just begun!</p>
             </div>
             
-            <div class="hero-section" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #ffffff;">
-              <h2 style="font-size: 24px; margin-bottom: 15px;">🏙️ City in the Clouds</h2>
-              <p style="line-height: 1.6; margin-bottom: 20px;">
-                You've just discovered something extraordinary. Fretiko isn't just a social network—it's a digital nation being born in clouds, where freedom meets connection and boundaries dissolve.
+            <div class="hero-section">
+              <h2 style="font-size: 20px; margin-bottom: 15px; color: #ffffff;">🏙️ City in the Clouds</h2>
+              <p style="line-height: 1.6; margin-bottom: 20px; color: #e2e8f0;">
+                You've discovered something extraordinary. Fretiko isn't just a social network—it's a digital nation where freedom meets connection.
               </p>
               <p class="highlight-text" style="color: #10b981;">
                 "A place where freedom meets connection."
@@ -273,7 +291,7 @@ To unsubscribe, reply to this email.`,
             </div>
             
             <div class="features-section">
-              <h3 style="font-size: 20px; margin-bottom: 15px;">🚀 What's Coming?</h3>
+              <h3 class="feature-title">🚀 What's Coming?</h3>
               <ul class="feature-list">
                 <li>✨ Revolutionary social shopping experience</li>
                 <li>🌐 Borderless digital community</li>
@@ -284,13 +302,13 @@ To unsubscribe, reply to this email.`,
             </div>
             
             <div class="cta-section">
-              <p class="highlight-text" style="color: #10b981; margin-bottom: 20px;">
-                The future is here. - Claim your space.
+              <p class="highlight-text">
+                The future is here. Claim your space.
               </p>
             </div>
             
             <div class="footer">
-              <p style="color: #9ca3af; margin: 0;">
+              <p style="margin: 0;">
                 ©️ 2024 Fretiko - Building digital nation.
               </p>
             </div>
