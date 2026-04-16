@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface HeaderProps {
   onDownloadClick: () => void
@@ -10,20 +11,30 @@ interface HeaderProps {
 export default function Header({ onDownloadClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  const menuItems = [
+    { name: 'About', href: '/about' },
+    { name: 'Partnership', href: '/partnership' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Support', href: '/support' },
+  ]
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-sm border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           {/* Logo + Name */}
           <div className="flex items-center space-x-2 sm:space-x-3">
-            <Image 
-              src="/logo_main.png" 
-              alt="Fretiko Logo" 
-              width={36}
-              height={36} 
-              className="rounded-lg object-cover sm:w-10 sm:h-10"
-            />
-            <h1 className="text-white text-xl sm:text-2xl font-bold">fretiko</h1>
+            <Link href="/" className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity">
+              <Image 
+                src="/logo_main.png" 
+                alt="Fretiko Logo" 
+                width={36}
+                height={36} 
+                className="rounded-lg object-cover sm:w-10 sm:h-10"
+              />
+              <h1 className="text-white text-xl sm:text-2xl font-bold">fretiko</h1>
+            </Link>
           </div>
 
           {/* Right Side: Download + Hamburger */}
@@ -56,16 +67,12 @@ export default function Header({ onDownloadClick }: HeaderProps) {
         {isMenuOpen && (
           <nav className="mt-3 sm:mt-4 py-3 sm:py-4 border-t border-white/10">
             <ul className="space-y-3 sm:space-y-4">
-              <li><a href="#about" className="text-white/70 hover:text-white transition-colors block text-sm sm:text-base">About</a></li>
-              <li><a href="#services" className="text-white/70 hover:text-white transition-colors block text-sm sm:text-base">Services</a></li>
-              <li><a href="#philosophy" className="text-white/70 hover:text-white transition-colors block text-sm sm:text-base">Philosophy</a></li>
-              <li><a href="#contact" className="text-white/70 hover:text-white transition-colors block text-sm sm:text-base">Contact</a></li>
-              <li><a href="#careers" className="text-white/70 hover:text-white transition-colors block text-sm sm:text-base">Careers</a></li>
-              <li><a href="#blog" className="text-white/70 hover:text-white transition-colors block text-sm sm:text-base">Blog</a></li>
-              <li><a href="#support" className="text-white/70 hover:text-white transition-colors block text-sm sm:text-base">Support</a></li>
+              {menuItems.map((item, index) => (
+                <li key={index}><a href={item.href} className="text-white/70 hover:text-white transition-colors block text-sm sm:text-base">{item.name}</a></li>
+              ))}
             </ul>
             <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-white/10">
-              <p className="text-white/40 text-xs sm:text-sm">&copy; 2024 fretiko. All rights reserved.</p>
+              <p className="text-white/40 text-xs sm:text-sm">&copy; 2026 fretiko. All rights reserved.</p>
             </div>
           </nav>
         )}
