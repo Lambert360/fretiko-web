@@ -1,14 +1,33 @@
 // Email collection API endpoint with Resend + Supabase
 import { Resend } from 'resend'
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Lazy initialization of clients
+let resendClient: Resend | null = null
+let supabaseClient: SupabaseClient | null = null
 
-// Supabase setup
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getResendClient(): Resend {
+  if (!resendClient) {
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY not configured')
+    }
+    resendClient = new Resend(apiKey)
+  }
+  return resendClient
+}
+
+function getSupabaseClient(): SupabaseClient {
+  if (!supabaseClient) {
+    const url = process.env.SUPABASE_URL
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+    if (!url || !key) {
+      throw new Error('Supabase environment variables not configured')
+    }
+    supabaseClient = createClient(url, key)
+  }
+  return supabaseClient
+}
 
 // Simple rate limiting (in production, use Redis or database)
 const rateLimit = new Map<string, { count: number; lastReset: number }>()
@@ -35,7 +54,7 @@ function checkRateLimit(ip: string): boolean {
 
 async function storeEmailInSupabase(email: string) {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await getSupabaseClient()
       .from('emails')
       .upsert([
         {
@@ -116,7 +135,7 @@ export async function POST(request: Request) {
 
 async function sendWelcomeEmail(email: string): Promise<boolean> {
   try {
-    const data = await resend.emails.send({
+    const data = await getResendClient().emails.send({
       from: process.env.RESEND_FROM_EMAIL || 'welcome@fretiko.com',
       to: [email],
       subject: 'Welcome to Fretiko',

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase-storage'
 
 const config = {
-  backendUrl: process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001',
+  backendUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
   isDev: process.env.NODE_ENV === 'development',
   isProd: process.env.NODE_ENV === 'production',
 }
@@ -31,6 +31,15 @@ async function makeBackendRequest(endpoint: string, options: RequestInit = {}) {
 // POST - Request password reset
 export async function POST(request: NextRequest) {
   try {
+    // Check if backend is configured
+    if (!config.backendUrl) {
+      console.error('❌ BACKEND_URL not configured')
+      return NextResponse.json(
+        { success: false, message: 'Server configuration error. Please contact support.' },
+        { status: 500 }
+      )
+    }
+
     const body = await request.json()
     const { username } = body
 

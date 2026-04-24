@@ -8,12 +8,18 @@ export const ENVIRONMENT = {
 // Backend URLs based on environment
 export const BACKEND_URLS = {
   development: process.env.DEV_BACKEND_URL || 'http://localhost:3000',
-  production: process.env.PROD_BACKEND_URL || 'https://api.fretiko.com',
+  production: process.env.PROD_BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL || '',
   test: process.env.TEST_BACKEND_URL || 'http://localhost:3000',
 } as const;
 
 // Get current backend URL based on environment
 export function getBackendUrl(): string {
+  // First check for explicit backend URL (for build time compatibility)
+  const explicitUrl = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.BACKEND_URL;
+  if (explicitUrl) {
+    return explicitUrl;
+  }
+
   if (ENVIRONMENT.isDevelopment) {
     return BACKEND_URLS.development;
   }

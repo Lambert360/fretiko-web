@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 // Backend configuration
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,6 +21,15 @@ export async function POST(request: NextRequest) {
     
     // Upload resume file if provided
     let resumeUrl = ''
+    // Check if backend is configured
+    if (!BACKEND_URL) {
+      console.error(' BACKEND_URL not configured')
+      return NextResponse.json(
+        { error: 'Server configuration error. Please contact support.' },
+        { status: 500 }
+      )
+    }
+
     if (resumeFile && resumeFile.size > 0) {
       console.log('Uploading resume file:', resumeFile.name)
       

@@ -26,6 +26,18 @@ interface LogisticsApplicationData {
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if backend is configured
+    if (!config.backendUrl) {
+      console.error('❌ BACKEND_URL not configured')
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: 'Server configuration error. Please contact support.' 
+        },
+        { status: 500 }
+      )
+    }
+
     // Handle FormData instead of JSON
 
     // Check if this is multipart form data (with files)

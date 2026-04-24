@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 // Backend configuration
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export async function GET() {
+  // If no backend URL configured, return empty data (for static build)
+  if (!BACKEND_URL) {
+    console.log('No BACKEND_URL configured, returning empty job listings')
+    return NextResponse.json({
+      success: true,
+      jobs: []
+    })
+  }
+
   try {
     // Fetch published job listings from backend
     const response = await fetch(`${BACKEND_URL}/public/job-listings`, {
@@ -25,10 +34,11 @@ export async function GET() {
     })
   } catch (error) {
     console.error('Job listings fetch error:', error)
-    return NextResponse.json(
-      { success: false, error: 'Failed to fetch job listings' },
-      { status: 500 }
-    )
+    // Return empty data instead of 500 error during build
+    return NextResponse.json({
+      success: true,
+      jobs: []
+    })
   }
 }
 
