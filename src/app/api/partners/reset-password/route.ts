@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase-storage'
+import { getBackendUrl } from '@/lib/env-config'
 
 const config = {
-  backendUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
+  backendUrl: getBackendUrl(),
   isDev: process.env.NODE_ENV === 'development',
   isProd: process.env.NODE_ENV === 'production',
 }

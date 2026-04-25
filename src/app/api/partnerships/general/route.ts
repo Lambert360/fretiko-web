@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getBackendUrl } from '@/lib/env-config'
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+const BACKEND_URL = getBackendUrl()
 
 export async function POST(request: NextRequest) {
   try {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getBackendUrl } from '@/lib/env-config'
 
 export async function GET(
   request: NextRequest,
@@ -16,7 +17,7 @@ export async function GET(
     }
 
     // Call backend API
-    const backendUrl = process.env.BACKEND_API_URL || 'http://localhost:3001'
+    const backendUrl = getBackendUrl()
     const response = await fetch(`${backendUrl}/logistics-partners/track/${trackingId}`, {
       method: 'GET',
       headers: {

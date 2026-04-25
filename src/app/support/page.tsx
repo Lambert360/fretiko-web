@@ -31,6 +31,8 @@ export default function SupportPage() {
   const { addToast } = useToast()
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const MAX_MESSAGE_LENGTH = 1000
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -145,6 +147,17 @@ export default function SupportPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Pre-submission validation
+    if (formData.message.length > MAX_MESSAGE_LENGTH) {
+      addToast({
+        title: 'Message Too Long',
+        description: `Please reduce your message to ${MAX_MESSAGE_LENGTH} characters or less.`,
+        type: 'error'
+      })
+      return
+    }
+    
     setIsSubmitting(true)
     
     try {
@@ -192,9 +205,27 @@ export default function SupportPage() {
       })
     } catch (error) {
       console.error('Failed to submit support ticket:', error)
+      
+      let errorMessage = 'Failed to submit support ticket. Please try again.'
+      
+      if (error instanceof Error) {
+        const errorText = error.message.toLowerCase()
+        
+        // Check for specific error patterns
+        if (errorText.includes('too long') || errorText.includes('max') || errorText.includes('limit') || errorText.includes('length')) {
+          errorMessage = `Your message is too long. Please keep it under ${MAX_MESSAGE_LENGTH} characters.`
+        } else if (errorText.includes('network') || errorText.includes('fetch') || errorText.includes('connection')) {
+          errorMessage = 'Network error. Please check your internet connection and try again.'
+        } else if (errorText.includes('backend') || errorText.includes('500') || errorText.includes('server')) {
+          errorMessage = 'Our servers are experiencing issues. Please try again later.'
+        } else if (errorText.includes('413') || errorText.includes('payload too large')) {
+          errorMessage = 'Your message or attachment is too large. Please reduce the size and try again.'
+        }
+      }
+      
       addToast({
         title: 'Submission Failed',
-        description: 'Failed to submit support ticket. Please try again.',
+        description: errorMessage,
         type: 'error'
       })
     } finally {
@@ -203,6 +234,10 @@ export default function SupportPage() {
   }
 
   const handleInputChange = (field: string, value: string) => {
+    // Enforce max length for message field
+    if (field === 'message' && value.length > MAX_MESSAGE_LENGTH) {
+      return
+    }
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
@@ -408,15 +443,34 @@ export default function SupportPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Message *</label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-medium">Message *</label>
+                    <span className={`text-xs ${
+                      formData.message.length > MAX_MESSAGE_LENGTH * 0.9 
+                        ? formData.message.length >= MAX_MESSAGE_LENGTH 
+                          ? 'text-red-400 font-medium' 
+                          : 'text-yellow-400'
+                        : 'text-gray-400'
+                    }`}>
+                      {formData.message.length}/{MAX_MESSAGE_LENGTH} characters
+                    </span>
+                  </div>
                   <Textarea
                     value={formData.message}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleInputChange('message', e.target.value)}
                     placeholder="Please describe your issue in detail..."
                     rows={6}
                     required
-                    className="bg-gray-700 border-gray-600 text-white"
+                    maxLength={MAX_MESSAGE_LENGTH}
+                    className={`bg-gray-700 border-gray-600 text-white ${
+                      formData.message.length >= MAX_MESSAGE_LENGTH ? 'border-red-500 focus:border-red-500' : ''
+                    }`}
                   />
+                  {formData.message.length >= MAX_MESSAGE_LENGTH && (
+                    <p className="text-xs text-red-400 mt-1">
+                      Maximum character limit reached. Please keep your message concise.
+                    </p>
+                  )}
                 </div>
 
                 <div>

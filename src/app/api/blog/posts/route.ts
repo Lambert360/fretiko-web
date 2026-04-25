@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getBackendUrl } from '@/lib/env-config'
 
 // Backend configuration
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+const BACKEND_URL = getBackendUrl()
 
 export async function GET() {
   // If no backend URL configured, return empty data (for static build)
@@ -14,8 +15,8 @@ export async function GET() {
   }
 
   try {
-    // Fetch published blog posts from backend
-    const response = await fetch(`${BACKEND_URL}/website-content/blog-posts/published`, {
+    // Fetch published blog posts from backend (public endpoint)
+    const response = await fetch(`${BACKEND_URL}/public/blog-posts`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

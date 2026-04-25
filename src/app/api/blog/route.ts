@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getBackendUrl } from '@/lib/env-config'
 
 // Backend configuration
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+const BACKEND_URL = getBackendUrl()
 
 export async function GET(request: NextRequest) {
   // If no backend URL configured, return empty data (for static build)

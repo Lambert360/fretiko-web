@@ -49,7 +49,7 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
       if (result.success) {
         // Direct APK download
         const link = document.createElement('a')
-        link.href = 'https://github.com/Lambert360/fretiko-mobile/releases/download/v0.1.0/Fretiko.apk'
+        link.href = 'https://github.com/Lambert360/app-releases/releases/download/v0.1.0/Fretiko.apk'
         link.download = 'fretiko.apk'
         document.body.appendChild(link)
         link.click()

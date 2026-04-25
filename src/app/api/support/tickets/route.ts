@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getBackendUrl } from '@/lib/env-config'
 
 // Backend configuration
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+const BACKEND_URL = getBackendUrl()
 
 export async function POST(request: NextRequest) {
   try {
@@ -72,7 +73,9 @@ export async function POST(request: NextRequest) {
     })
     
     if (!response.ok) {
-      throw new Error(`Backend error: ${response.statusText}`)
+      const errorData = await response.json().catch(() => ({}))
+      const errorMessage = errorData.message || errorData.error || response.statusText
+      throw new Error(`Backend error: ${errorMessage}`)
     }
     
     const result = await response.json()
@@ -84,8 +87,9 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Support ticket creation error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create support ticket'
     return NextResponse.json(
-      { success: false, error: 'Failed to create support ticket' },
+      { success: false, error: errorMessage },
       { status: 500 }
     )
   }

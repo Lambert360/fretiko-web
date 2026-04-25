@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getBackendUrl } from '@/lib/env-config'
 
 // Backend configuration
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL
+const BACKEND_URL = getBackendUrl()
 
 export async function POST(request: NextRequest) {
   try {
@@ -84,9 +85,10 @@ export async function POST(request: NextRequest) {
     })
     
     if (!response.ok) {
-      const errorText = await response.text()
-      console.log('Job application error response:', errorText)
-      throw new Error(`Backend error: ${response.statusText}`)
+      const errorData = await response.json().catch(() => ({}))
+      const errorMessage = errorData.message || errorData.error || response.statusText
+      console.log('Job application error response:', errorMessage)
+      throw new Error(`Backend error: ${errorMessage}`)
     }
     
     const result = await response.json()
@@ -98,8 +100,9 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Job application submission error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to submit application'
     return NextResponse.json(
-      { success: false, error: 'Failed to submit application' },
+      { success: false, error: errorMessage },
       { status: 500 }
     )
   }

@@ -24,6 +24,8 @@ interface JobListing {
   status: 'draft' | 'published'
 }
 
+const MAX_TEXT_LENGTH = 1000
+
 interface JobApplicationForm {
   jobId: string
   jobTitle: string
@@ -101,6 +103,20 @@ export default function CareersPage() {
     
     if (!applicationForm.name || !applicationForm.email || !applicationForm.phone) {
       alert('Please fill in all required fields')
+      return
+    }
+    
+    // Check character limits
+    if (applicationForm.coverLetter.length > MAX_TEXT_LENGTH) {
+      alert(`Cover letter is too long. Please keep it under ${MAX_TEXT_LENGTH} characters.`)
+      return
+    }
+    if (applicationForm.experience.length > MAX_TEXT_LENGTH) {
+      alert(`Experience description is too long. Please keep it under ${MAX_TEXT_LENGTH} characters.`)
+      return
+    }
+    if (applicationForm.education.length > MAX_TEXT_LENGTH) {
+      alert(`Education description is too long. Please keep it under ${MAX_TEXT_LENGTH} characters.`)
       return
     }
 
@@ -378,29 +394,75 @@ export default function CareersPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Professional Experience
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-sm font-medium text-gray-300">
+                    Professional Experience
+                  </label>
+                  <span className={`text-xs ${
+                    applicationForm.experience.length > MAX_TEXT_LENGTH * 0.9
+                      ? applicationForm.experience.length >= MAX_TEXT_LENGTH
+                        ? 'text-red-400 font-medium'
+                        : 'text-yellow-400'
+                      : 'text-gray-400'
+                  }`}>
+                    {applicationForm.experience.length}/{MAX_TEXT_LENGTH}
+                  </span>
+                </div>
                 <Textarea
                   value={applicationForm.experience}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setApplicationForm({ ...applicationForm, experience: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                    if (e.target.value.length <= MAX_TEXT_LENGTH) {
+                      setApplicationForm({ ...applicationForm, experience: e.target.value })
+                    }
+                  }}
                   placeholder="Tell us about your relevant experience..."
                   rows={4}
-                  className="bg-gray-800 border-gray-700 text-white"
+                  maxLength={MAX_TEXT_LENGTH}
+                  className={`bg-gray-800 text-white ${
+                    applicationForm.experience.length >= MAX_TEXT_LENGTH
+                      ? 'border-red-500 focus:border-red-500'
+                      : 'border-gray-700'
+                  }`}
                 />
+                {applicationForm.experience.length >= MAX_TEXT_LENGTH && (
+                  <p className="text-xs text-red-400 mt-1">Maximum character limit reached.</p>
+                )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Education
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-sm font-medium text-gray-300">
+                    Education
+                  </label>
+                  <span className={`text-xs ${
+                    applicationForm.education.length > MAX_TEXT_LENGTH * 0.9
+                      ? applicationForm.education.length >= MAX_TEXT_LENGTH
+                        ? 'text-red-400 font-medium'
+                        : 'text-yellow-400'
+                      : 'text-gray-400'
+                  }`}>
+                    {applicationForm.education.length}/{MAX_TEXT_LENGTH}
+                  </span>
+                </div>
                 <Textarea
                   value={applicationForm.education}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setApplicationForm({ ...applicationForm, education: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                    if (e.target.value.length <= MAX_TEXT_LENGTH) {
+                      setApplicationForm({ ...applicationForm, education: e.target.value })
+                    }
+                  }}
                   placeholder="Your educational background..."
                   rows={3}
-                  className="bg-gray-800 border-gray-700 text-white"
+                  maxLength={MAX_TEXT_LENGTH}
+                  className={`bg-gray-800 text-white ${
+                    applicationForm.education.length >= MAX_TEXT_LENGTH
+                      ? 'border-red-500 focus:border-red-500'
+                      : 'border-gray-700'
+                  }`}
                 />
+                {applicationForm.education.length >= MAX_TEXT_LENGTH && (
+                  <p className="text-xs text-red-400 mt-1">Maximum character limit reached.</p>
+                )}
               </div>
 
               <div>
@@ -416,17 +478,40 @@ export default function CareersPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Cover Letter *
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-sm font-medium text-gray-300">
+                    Cover Letter *
+                  </label>
+                  <span className={`text-xs ${
+                    applicationForm.coverLetter.length > MAX_TEXT_LENGTH * 0.9
+                      ? applicationForm.coverLetter.length >= MAX_TEXT_LENGTH
+                        ? 'text-red-400 font-medium'
+                        : 'text-yellow-400'
+                      : 'text-gray-400'
+                  }`}>
+                    {applicationForm.coverLetter.length}/{MAX_TEXT_LENGTH}
+                  </span>
+                </div>
                 <Textarea
                   value={applicationForm.coverLetter}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setApplicationForm({ ...applicationForm, coverLetter: e.target.value })}
+                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                    if (e.target.value.length <= MAX_TEXT_LENGTH) {
+                      setApplicationForm({ ...applicationForm, coverLetter: e.target.value })
+                    }
+                  }}
                   placeholder="Why are you interested in this position and why would you be a great fit?"
                   rows={6}
                   required
-                  className="bg-gray-800 border-gray-700 text-white"
+                  maxLength={MAX_TEXT_LENGTH}
+                  className={`bg-gray-800 text-white ${
+                    applicationForm.coverLetter.length >= MAX_TEXT_LENGTH
+                      ? 'border-red-500 focus:border-red-500'
+                      : 'border-gray-700'
+                  }`}
                 />
+                {applicationForm.coverLetter.length >= MAX_TEXT_LENGTH && (
+                  <p className="text-xs text-red-400 mt-1">Maximum character limit reached.</p>
+                )}
               </div>
 
               <div className="flex justify-end gap-4">

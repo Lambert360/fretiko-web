@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Header from '@/components/Header'
 
+const MAX_MESSAGE_LENGTH = 1000
+
 export default function GeneralPartnership() {
   const [formData, setFormData] = useState({
     name: '',
@@ -17,11 +19,22 @@ export default function GeneralPartnership() {
   const [error, setError] = useState('')
 
   const handleInputChange = (field: string, value: string) => {
+    // Enforce max length for message field
+    if (field === 'message' && value.length > MAX_MESSAGE_LENGTH) {
+      return
+    }
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Pre-submission validation
+    if (formData.message.length > MAX_MESSAGE_LENGTH) {
+      setError(`Your message is too long. Please keep it under ${MAX_MESSAGE_LENGTH} characters.`)
+      return
+    }
+    
     setIsSubmitting(true)
     setError('')
 
@@ -191,17 +204,38 @@ export default function GeneralPartnership() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Message *
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-sm font-medium text-gray-300">
+                  Message *
+                </label>
+                <span className={`text-xs ${
+                  formData.message.length > MAX_MESSAGE_LENGTH * 0.9
+                    ? formData.message.length >= MAX_MESSAGE_LENGTH
+                      ? 'text-red-400 font-medium'
+                      : 'text-yellow-400'
+                    : 'text-gray-400'
+                }`}>
+                  {formData.message.length}/{MAX_MESSAGE_LENGTH} characters
+                </span>
+              </div>
               <textarea
                 value={formData.message}
                 onChange={(e) => handleInputChange('message', e.target.value)}
                 rows={4}
                 required
+                maxLength={MAX_MESSAGE_LENGTH}
                 placeholder="Tell us about your partnership idea and how we can work together..."
-                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className={`w-full px-4 py-2 bg-gray-800 border rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                  formData.message.length >= MAX_MESSAGE_LENGTH
+                    ? 'border-red-500 focus:border-red-500'
+                    : 'border-gray-700'
+                }`}
               />
+              {formData.message.length >= MAX_MESSAGE_LENGTH && (
+                <p className="text-xs text-red-400 mt-1">
+                  Maximum character limit reached. Please keep your message concise.
+                </p>
+              )}
             </div>
 
             {/* Error Display */}
