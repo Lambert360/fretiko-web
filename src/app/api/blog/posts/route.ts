@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getBackendUrl } from '@/lib/env-config'
 
+// Force dynamic rendering to ensure env vars are read at request time, not build time
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 export async function GET() {
   // Get backend URL at runtime (not build time) to support env vars set in production
   const BACKEND_URL = getBackendUrl()
