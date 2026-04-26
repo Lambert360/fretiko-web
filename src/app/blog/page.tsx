@@ -58,8 +58,8 @@ export default function BlogPage() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // Fetch real blog posts from API
-        const response = await fetch('/api/blog')
+        // Fetch real blog posts from API with cache-busting
+        const response = await fetch(`/api/blog?t=${Date.now()}`, { cache: 'no-store' })
         
         if (!response.ok) {
           throw new Error(`Failed to fetch blog posts: ${response.statusText}`)
