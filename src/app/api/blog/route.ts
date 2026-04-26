@@ -40,10 +40,17 @@ export async function GET(request: NextRequest) {
 
     const result = await response.json()
     
-    return NextResponse.json({
+    const nextResponse = NextResponse.json({
       success: true,
       posts: result.data || []
     })
+    
+    // Prevent caching of API responses
+    nextResponse.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate')
+    nextResponse.headers.set('Pragma', 'no-cache')
+    nextResponse.headers.set('Expires', '0')
+    
+    return nextResponse
   } catch (error) {
     console.error('Blog posts fetch error:', error)
     // Return empty data instead of 500 error during build
