@@ -15,8 +15,12 @@ export const BACKEND_URLS = {
 // Get current backend URL based on environment
 export function getBackendUrl(): string {
   // First check for explicit backend URL (for build time compatibility)
-  const explicitUrl = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.BACKEND_URL;
+  let explicitUrl = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.BACKEND_URL;
   if (explicitUrl) {
+    // Auto-add https:// if no protocol specified
+    if (!explicitUrl.startsWith('http://') && !explicitUrl.startsWith('https://')) {
+      explicitUrl = `https://${explicitUrl}`;
+    }
     return explicitUrl;
   }
 
@@ -24,7 +28,12 @@ export function getBackendUrl(): string {
     return BACKEND_URLS.development;
   }
   if (ENVIRONMENT.isProduction) {
-    return BACKEND_URLS.production;
+    // Auto-add https:// if production URL lacks protocol
+    let prodUrl = BACKEND_URLS.production;
+    if (prodUrl && !prodUrl.startsWith('http://') && !prodUrl.startsWith('https://')) {
+      prodUrl = `https://${prodUrl}`;
+    }
+    return prodUrl;
   }
   if (ENVIRONMENT.isTest) {
     return BACKEND_URLS.test;

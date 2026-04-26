@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getBackendUrl } from '@/lib/env-config'
 
-// Backend configuration
-const BACKEND_URL = getBackendUrl()
-
 export async function GET(request: NextRequest) {
+  // Get backend URL at runtime (not build time) to support env vars set in production
+  const BACKEND_URL = getBackendUrl()
+  
+  console.log('🔍 Blog API - BACKEND_URL:', BACKEND_URL || 'NOT SET')
+  
   // If no backend URL configured, return empty data (for static build)
   if (!BACKEND_URL) {
-    console.log('No BACKEND_URL configured, returning empty blog posts')
+    console.log('❌ No BACKEND_URL configured, returning empty blog posts')
     return NextResponse.json({
       success: true,
       posts: []
