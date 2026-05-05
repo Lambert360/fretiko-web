@@ -487,11 +487,21 @@ export default function PrivacyPolicy() {
                       <li>Parents can report underage accounts for removal</li>
                     </ul>
                   </div>
+
+                  <div className="bg-white/5 rounded-lg p-4 border border-white/10">
+                    <h3 className="font-semibold text-white mb-2">🛡️ Child Safety Standards</h3>
+                    <ul className="list-disc list-inside space-y-1 text-white/70">
+                      <li>We maintain strict <Link href="/csae" className="text-neon-cyan hover:underline">Child Safety Standards</Link> against CSAE</li>
+                      <li>Zero-tolerance policy for child sexual abuse and exploitation</li>
+                      <li>Immediate reporting of violations to law enforcement</li>
+                      <li>Parents can report safety concerns to childsafety@fretiko.com</li>
+                    </ul>
+                  </div>
                 </div>
 
                 <div className="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
                   <p className="text-red-300 text-sm">
-                    <strong>Strict Enforcement:</strong> We actively verify age when possible and will immediately terminate accounts of users under 18. This is a zero-tolerance policy.
+                    <strong>Strict Enforcement:</strong> We actively verify age when possible and will immediately terminate accounts of users under 18. This is a zero-tolerance policy. See our <Link href="/csae" className="text-neon-cyan hover:underline">Child Safety Standards</Link> for more details.
                   </p>
                 </div>
               </div>
@@ -598,6 +608,9 @@ export default function PrivacyPolicy() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/terms" className="text-neon-cyan hover:text-neon-cyan/80 transition-colors">
                 Terms of Service
+              </Link>
+              <Link href="/csae" className="text-neon-cyan hover:text-neon-cyan/80 transition-colors">
+                Child Safety Standards
               </Link>
               <Link href="/contact" className="text-neon-cyan hover:text-neon-cyan/80 transition-colors">
                 Contact Us

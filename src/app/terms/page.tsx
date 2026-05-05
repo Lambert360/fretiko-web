@@ -285,6 +285,7 @@ export default function TermsOfService() {
                       <li>Attempting to gain unauthorized access to our systems</li>
                       <li>Using automated tools to access our Services</li>
                       <li>Interfering with or disrupting our Services</li>
+                      <li>Any form of child sexual abuse or exploitation (CSAE) - <Link href="/csae" className="text-neon-cyan hover:underline">see our Child Safety Standards</Link></li>
                     </ul>
                   </div>
                 </div>
@@ -747,6 +748,9 @@ export default function TermsOfService() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/privacy" className="text-neon-cyan hover:text-neon-cyan/80 transition-colors">
                 Privacy Policy
+              </Link>
+              <Link href="/csae" className="text-neon-cyan hover:text-neon-cyan/80 transition-colors">
+                Child Safety Standards
               </Link>
               <Link href="/contact" className="text-neon-cyan hover:text-neon-cyan/80 transition-colors">
                 Contact Us

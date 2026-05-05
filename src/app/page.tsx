@@ -275,6 +275,7 @@ export default function Home() {
                 <li><Link href="/contact" className="text-white/60 hover:text-neon-cyan transition-colors">Contact</Link></li>
                 <li><Link href="/privacy" className="text-white/60 hover:text-neon-cyan transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/terms" className="text-white/60 hover:text-neon-cyan transition-colors">Terms of Service</Link></li>
+                <li><Link href="/csae" className="text-white/60 hover:text-neon-cyan transition-colors">Child Safety Standards</Link></li>
               </ul>
             </div>
           </div>
