@@ -53,7 +53,7 @@ export default function ApplicationTracking() {
       case 'rejected': return 'Rejected'
       case 'under_review': return 'Under Review'
       case 'in_progress': return 'In Progress'
-      default: status
+      default: return status
     }
   }
 

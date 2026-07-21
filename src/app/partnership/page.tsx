@@ -11,6 +11,18 @@ export default function PartnershipPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white">
       <Header onDownloadClick={() => {}} />
+      {/* Login Button */}
+      <div className="absolute top-20 right-4 sm:right-6 lg:right-8 z-10">
+        <Link
+          href="/partners/login"
+          className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors shadow-lg"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+          </svg>
+          Partner Login
+        </Link>
+      </div>
       {/* Hero Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 mt-16">
         <div className="max-w-6xl mx-auto text-center">

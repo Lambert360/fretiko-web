@@ -234,8 +234,10 @@ export default function Home() {
                   </svg>
                 </a>
                 <a href="https://www.tiktok.com/@fretiko0" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-neon-cyan/20 transition-colors">
-                  <svg className="w-5 h-5 text-white/80" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.44 6.44 0 0 0-1-.05A6.44 6.44 0 0 0 8 18.31 6.44 6.44 0 0 0 14.44 22a6.44 6.44 0 0 0 6.44-6.44v-7.27a8.88 8.88 0 0 0 4.77 1.4V6.7a5.08 5.08 0 0 1-3.06-1.01Z"/>
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.44 6.44 0 0 0-1-.05A6.44 6.44 0 0 0 8 18.31 6.44 6.44 0 0 0 14.44 22a6.44 6.44 0 0 0 6.44-6.44v-7.27a8.88 8.88 0 0 0 4.77 1.4V6.7a5.08 5.08 0 0 1-3.06-1.01Z" fill="#69C9D0" transform="translate(-0.7, -0.7)"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.44 6.44 0 0 0-1-.05A6.44 6.44 0 0 0 8 18.31 6.44 6.44 0 0 0 14.44 22a6.44 6.44 0 0 0 6.44-6.44v-7.27a8.88 8.88 0 0 0 4.77 1.4V6.7a5.08 5.08 0 0 1-3.06-1.01Z" fill="#EE1D52" transform="translate(0.7, 0.7)"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.44 6.44 0 0 0-1-.05A6.44 6.44 0 0 0 8 18.31 6.44 6.44 0 0 0 14.44 22a6.44 6.44 0 0 0 6.44-6.44v-7.27a8.88 8.88 0 0 0 4.77 1.4V6.7a5.08 5.08 0 0 1-3.06-1.01Z" fill="white"/>
                   </svg>
                 </a>
                 <a href="https://www.instagram.com/fretikoltd" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-neon-purple/20 transition-colors">
@@ -247,6 +249,42 @@ export default function Home() {
                   <svg className="w-5 h-5 text-white/80" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
+                </a>
+              </div>
+
+              {/* App Store Badges */}
+              <div className="flex flex-col gap-2.5 mt-5">
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.kinging.fretikomobile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-neon-cyan/40 rounded-xl px-4 py-2.5 transition-all duration-200 w-fit"
+                >
+                  <svg viewBox="0 0 24 24" className="w-6 h-6 shrink-0" fill="none">
+                    <path d="M3.18 23.76a2 2 0 0 0 2.09-.13L18 16l-3.35-3.35L3.18 23.76Z" fill="#34A853"/>
+                    <path d="M21.54 10.27a2 2 0 0 0 0-3.48L18.71 5.3 15.05 9l3.66 3.66 2.83-1.39Z" fill="#FBBC04"/>
+                    <path d="M3.18.24A2 2 0 0 0 2 2.06v19.88a2 2 0 0 0 1.18 1.82L15.05 12 3.18.24Z" fill="#4285F4"/>
+                    <path d="M18.71 18.7 5.27 23.63a2 2 0 0 1-2.09-.13L15.05 12l3.66 3.66-3.35 3.35 3.35-3.35L18.71 18.7Z" fill="#EA4335"/>
+                    <path d="M15.05 12 3.18.24a2 2 0 0 1 2.09-.13L18.71 5.3 15.05 12Z" fill="#EA4335"/>
+                  </svg>
+                  <div>
+                    <p className="text-white/50 text-[9px] leading-none uppercase tracking-widest">Get it on</p>
+                    <p className="text-white text-sm font-semibold leading-tight mt-0.5">Google Play</p>
+                  </div>
+                </a>
+                <a
+                  href="https://apps.apple.com/no/app/fretiko/id6766225628?l=nb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-neon-cyan/40 rounded-xl px-4 py-2.5 transition-all duration-200 w-fit"
+                >
+                  <svg viewBox="0 0 814 1000" className="w-5 h-6 shrink-0" fill="white">
+                    <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-47.4-148.2-106.6zM500.2 181c-34.1 3.7-82.5 28.3-100.2 55.2-14.8 23.1-26.1 58.2-21.5 88.1 4.6 2.1 9.4 3.2 14.3 3.2 31.5 0 75.5-24.5 91.3-50.1 13.9-22.7 21.1-56.4 16.1-96.4z"/>
+                  </svg>
+                  <div>
+                    <p className="text-white/50 text-[9px] leading-none uppercase tracking-widest">Download on the</p>
+                    <p className="text-white text-sm font-semibold leading-tight mt-0.5">App Store</p>
+                  </div>
                 </a>
               </div>
             </div>
